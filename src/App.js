@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+/** @format */
+import React, { useState, useEffect } from "react";
+import { commerce } from "./api/commerce";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const [products, setProducts] = useState([]);
+	const getProducts = async () => {
+		const { data } = await commerce.products.list();
+		setProducts(data);
+	};
+
+	useEffect(() => {
+		getProducts();
+	}, []);
+
+	console.log(products);
+
+	return (
+		<div>
+			<h1>Vinyl</h1>
+		</div>
+	);
+};
 
 export default App;
