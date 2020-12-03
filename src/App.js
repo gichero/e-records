@@ -1,9 +1,12 @@
 /** @format */
 import React, { useState, useEffect } from "react";
 import { commerce } from "./api/commerce";
+import Navbar from "./components/Navbar/Navbar";
+import Products from "./components/Products/Products";
 
 const App = () => {
 	const [products, setProducts] = useState([]);
+
 	const getProducts = async () => {
 		const { data } = await commerce.products.list();
 		setProducts(data);
@@ -17,7 +20,8 @@ const App = () => {
 
 	return (
 		<div>
-			<h1>Vinyl</h1>
+			<Navbar />
+			<Products products={products} />
 		</div>
 	);
 };
