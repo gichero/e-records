@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import useStyles from "./navbarStyles";
+import logo from "../../media/vinyl.png";
 
 const Navbar = () => {
 	const classes = useStyles();
@@ -20,11 +21,19 @@ const Navbar = () => {
 			<AppBar position="fixed" className={classes.appBar} color="inherit">
 				<Toolbar>
 					<Typography variant="h6" className={classes.title} color="inherit">
-						<img alt="e-records" height="25px" className={classes.image} />
-						e-records
+						<img
+							src={logo}
+							alt="e-records"
+							height="25px"
+							className={classes.image}
+						/>
+						vinyl
 					</Typography>
 					<div className={classes.grow} />
 					<div className={classes} />
+					<Badge badgeContent={2} color="secondary">
+						<ShoppingCart />
+					</Badge>
 				</Toolbar>
 			</AppBar>
 		</>

@@ -18,6 +18,7 @@ export default makeStyles((theme) => ({
 		alignItems: "center",
 		display: "flex",
 		textDecoration: "none",
+		color: " #e6ac00",
 	},
 	image: {
 		marginRight: "10px",
