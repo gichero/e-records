@@ -11,6 +11,7 @@ import {
 	Typography,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import useStyles from "./navbarStyles";
 import logo from "../../media/vinyl.png";
 
@@ -31,9 +32,11 @@ const Navbar = ({ totalItems }) => {
 					</Typography>
 					<div className={classes.grow} />
 					<div className={classes} />
-					<Badge badgeContent={totalItems} color="secondary">
-						<ShoppingCart />
-					</Badge>
+					<Link to="/cart">
+						<Badge badgeContent={totalItems} color="secondary">
+							<ShoppingCart />
+						</Badge>
+					</Link>
 				</Toolbar>
 			</AppBar>
 		</>

@@ -1,8 +1,10 @@
 /** @format */
 import React, { useState, useEffect } from "react";
 import { commerce } from "./api/commerce";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Products from "./components/Products/Products";
+import Cart from "./components/Cart/Cart";
 
 const App = () => {
 	const [products, setProducts] = useState([]);
@@ -30,10 +32,19 @@ const App = () => {
 	console.log(cart);
 
 	return (
-		<div>
-			<Navbar totalItems={cart.total_items} />
-			<Products products={products} onAddToCart={addToCart} />
-		</div>
+		<BrowserRouter>
+			<div>
+				<Navbar totalItems={cart.total_items} />
+				<Switch>
+					<Route exact path="/">
+						<Products products={products} onAddToCart={addToCart} />
+					</Route>
+					<Route exact path="/cart">
+						<Cart cart={cart} />
+					</Route>
+				</Switch>
+			</div>
+		</BrowserRouter>
 	);
 };
 
