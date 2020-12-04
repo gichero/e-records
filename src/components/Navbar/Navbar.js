@@ -14,7 +14,7 @@ import { ShoppingCart } from "@material-ui/icons";
 import useStyles from "./navbarStyles";
 import logo from "../../media/vinyl.png";
 
-const Navbar = () => {
+const Navbar = ({ totalItems }) => {
 	const classes = useStyles();
 	return (
 		<>
@@ -31,7 +31,7 @@ const Navbar = () => {
 					</Typography>
 					<div className={classes.grow} />
 					<div className={classes} />
-					<Badge badgeContent={2} color="secondary">
+					<Badge badgeContent={totalItems} color="secondary">
 						<ShoppingCart />
 					</Badge>
 				</Toolbar>
