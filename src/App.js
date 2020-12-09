@@ -45,8 +45,6 @@ const App = () => {
 		getCart();
 	}, []);
 
-	console.log(cart);
-
 	return (
 		<BrowserRouter>
 			<div>
@@ -64,7 +62,7 @@ const App = () => {
 						/>
 					</Route>
 					<Route exact path="/checkout">
-						<Checkout />
+						<Checkout cart={cart} />
 					</Route>
 				</Switch>
 			</div>
