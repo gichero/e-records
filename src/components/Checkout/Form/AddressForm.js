@@ -14,7 +14,7 @@ import FormInput from "./FormInput";
 import { commerce } from "../../../api/commerce";
 import { Link } from "react-router-dom";
 
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, next }) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
 	const [shippingCountry, setShippingCountry] = useState("");
 	const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -35,16 +35,15 @@ const AddressForm = ({ checkoutToken }) => {
 		})
 	);
 
-	const options = shippingOptions.map((option) => ({
-		id: option.id,
-		label: `${option.description} - (${option.price.formatted_with_symbol})`,
+	const options = shippingOptions.map((opt) => ({
+		id: opt.id,
+		label: `${opt.description} - (${opt.price.formatted_with_symbol})`,
 	}));
 
 	const getShippingCountries = async (checkoutTokenId) => {
 		const { countries } = await commerce.services.localeListShippingCountries(
 			checkoutTokenId
 		);
-		console.log(countries);
 		setShippingCountries(countries);
 		setShippingCountry(Object.keys(countries)[0]);
 	};
@@ -96,7 +95,16 @@ const AddressForm = ({ checkoutToken }) => {
 				Shipping Address
 			</Typography>
 			<FormProvider {...methods}>
-				<form onSubmit="">
+				<form
+					onSubmit={methods.handleSubmit((data) =>
+						next({
+							...data,
+							shippingCountry,
+							shippingSubdivision,
+							shippingOption,
+						})
+					)}
+				>
 					<Grid container spacing={3}>
 						<FormInput name="firstName" label="First Name" />
 						<FormInput name="lastName" label="Last Name" />
@@ -152,7 +160,7 @@ const AddressForm = ({ checkoutToken }) => {
 						<Button component={Link} to="/cart" variant="outlined">
 							Back
 						</Button>
-						<Button component={Link} to="/payment" variant="contained">
+						<Button type="submit" color="primary" variant="contained">
 							Next
 						</Button>
 					</div>
