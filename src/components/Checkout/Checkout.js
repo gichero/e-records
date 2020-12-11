@@ -9,7 +9,7 @@ import {
 	Typography,
 	CircularProgress,
 	Button,
-	Diveder,
+	Divider,
 } from "@material-ui/core";
 import useStyles from "./checkoutStyles";
 import AddressForm from "./Form/AddressForm";
@@ -18,7 +18,7 @@ import { commerce } from "../../api/commerce";
 
 const steps = ["Shipping address", "Payment details"];
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, order, captureCheckout, error }) => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [checkoutToken, setCheckoutToken] = useState(null);
 	const [shippingData, setShippingData] = useState({});
@@ -52,7 +52,13 @@ const Checkout = ({ cart }) => {
 		activeStep === 0 ? (
 			<AddressForm checkoutToken={checkoutToken} next={next} />
 		) : (
-			<PaymentForm checkoutToken={checkoutToken} />
+			<PaymentForm
+				checkoutToken={checkoutToken}
+				nextStep={nextStep}
+				backStep={backStep}
+				shippingData={shippingData}
+				captureCheckout={captureCheckout}
+			/>
 		);
 
 	const Confirmation = () => <div>Confirmation</div>;
