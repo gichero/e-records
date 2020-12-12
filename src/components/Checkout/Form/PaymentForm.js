@@ -41,20 +41,24 @@ const PaymentForm = ({
 					email: shippingData.email,
 				},
 				shipping: {
-					name: "Primary",
+					name: "International",
 					street: shippingData.address1,
 					town_city: shippingData.city,
 					county_state: shippingData.shippingSubdivision,
 					postal_zip_code: shippingData.zip,
 					country: shippingData.shippingCountry,
 				},
-				fulfilment: { shipping_method: shippingData.shippingOption },
+				fulfillment: { shipping_method: shippingData.shippingOption },
 				payment: {
 					gateway: "stripe",
-					stripe: { payment_method_id: paymentMethod.id },
+					stripe: {
+						payment_method_id: paymentMethod.id,
+					},
 				},
 			};
+
 			captureCheckout(checkoutToken.id, orderData);
+
 			nextStep();
 		}
 	};
